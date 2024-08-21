@@ -1,0 +1,32 @@
+<div class="app-container">
+    <div class="table-container">
+      <table>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Total Time Worked</th>
+            <th scope="col">Entry Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees" [ngClass]="{'highlight': employee.totalTimeWorked < 100}">
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.totalTimeWorked.toFixed(2) }} hours</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{employee.name}}" data-bs-toggle="dropdown" aria-expanded="false">
+                  View Notes
+                </button>
+                <ul class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + employee.name">
+                  <li *ngFor="let note of employee.entryNotes">
+                    <a class="dropdown-item" href="#">{{ note }}</a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
