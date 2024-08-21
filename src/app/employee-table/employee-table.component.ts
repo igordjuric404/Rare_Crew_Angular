@@ -14,7 +14,6 @@ export class EmployeeTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.employeeService.getEmployees().subscribe((data: any) => {
-      console.log('Data received in component:', data); // Log the data in the component
       this.employees = data;
     });
   }

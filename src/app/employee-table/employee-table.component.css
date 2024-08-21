@@ -1,38 +1,20 @@
 
-* {
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  body {
-    background-color: #f4f7f9;
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .app-container{
-    display: flex;
-    justify-content: center;
-  }
-
   .table-container {
-    width: 30%;
-    margin-top: 40px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    border: 2px solid #2c3e50;
+    border: 2px solid #ff8200;
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
     margin: 0px;
+    color: #212529;
   }
   
   thead {
-    background-color: #2c3e50;
+    background-color: #212529;
     color: white;
     text-transform: uppercase;
     font-weight: 500;
@@ -46,11 +28,11 @@
   }
   
   thead th:first-child {
-    border-top-left-radius: 8px;
+    border-top-left-radius: 6px;
   }
   
   thead th:last-child {
-    border-top-right-radius: 8px;
+    border-top-right-radius: 6px;
   }
   
   tbody tr:last-child th, td {
@@ -58,40 +40,42 @@
   }
   
   tbody tr:last-child td:first-child {
-    border-bottom-left-radius: 8px;
+    border-bottom-left-radius: 6px;
   }
   
   tbody tr:last-child td:last-child {
-    border-bottom-right-radius: 8px;
+    border-bottom-right-radius: 6px;
   }
   
   tbody tr:nth-child(even) {
-    background-color: #f8f8f8; /* Apply striped effect */
+    background-color: #f8f8f8;
   }
   
   tbody tr:nth-child(odd) {
-    background-color: #ffffff; /* Ensure alternating rows are white */
+    background-color: #ffffff;
   }
   
   .highlight {
-    background-color: #f3bdbd !important;
+    background-color: #ffdcdc!important;
+    color: #f76f6f !important;
+    font-weight:900;
   }
   
   tbody tr:hover {
-    background-color: #ebebeb !important; /* Ensure hover effect is applied */
+    background-color: #ebebeb !important; 
   }
   
   tbody tr.highlight:hover {
-    background-color: #e4a6a6 !important;
+    background-color: #ffd0d0 !important;
   }
   
-  td:first-child {
-    font-weight: 500;
-    color: #34495e;
-  }
   
   .dropdown-menu, .dropdown-item{
     width: 750px;
+  }
+
+  .btn{
+    background-color: #ffb500;
   }
 
   @media (max-width: 768px) {

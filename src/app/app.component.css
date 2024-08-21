@@ -1,0 +1,14 @@
+* {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+
+  
+  .app-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+  }

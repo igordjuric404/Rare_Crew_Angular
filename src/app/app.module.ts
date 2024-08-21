@@ -4,6 +4,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component'; 
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { EmployeeTableComponent } from './employee-table/employee-table.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PieChartComponent
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

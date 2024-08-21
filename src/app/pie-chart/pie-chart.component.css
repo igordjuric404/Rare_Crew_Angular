@@ -1,0 +1,9 @@
+.chart-container{
+    width: 750px;
+}
+
+canvas {
+    width: 100%;
+    margin: auto;
+  }
+  
