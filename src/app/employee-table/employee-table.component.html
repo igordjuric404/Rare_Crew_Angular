@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of employees; trackBy: trackByEmployee" [ngClass]="{'highlight': employee.totalTimeWorked < 100}">
+      <tr *ngFor="let employee of employees$ | async; trackBy: trackByEmployee" [ngClass]="{'highlight': employee.totalTimeWorked < 100}">
         <td>{{ employee.name }}</td>
         <td>{{ employee.totalTimeWorked.toFixed(2) }} hours</td>
         <td>
