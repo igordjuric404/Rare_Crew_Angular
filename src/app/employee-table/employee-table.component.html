@@ -8,12 +8,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of employees" [ngClass]="{'highlight': employee.totalTimeWorked < 100}">
+      <tr *ngFor="let employee of employees; trackBy: trackByEmployee" [ngClass]="{'highlight': employee.totalTimeWorked < 100}">
         <td>{{ employee.name }}</td>
         <td>{{ employee.totalTimeWorked.toFixed(2) }} hours</td>
         <td>
           <div class="dropdown">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton{{employee.name}}" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn dropdown-toggle" type="button" [id]="'dropdownMenuButton' + employee.name" data-bs-toggle="dropdown" aria-expanded="false">
               View Notes
             </button>
             <ul class="dropdown-menu" [attr.aria-labelledby]="'dropdownMenuButton' + employee.name">
@@ -24,6 +24,6 @@
           </div>
         </td>
       </tr>
-    </tbody>
+    </tbody>    
   </table>
 </div>

@@ -7,3 +7,8 @@ canvas {
     margin: auto;
   }
   
+.custom-legend .chart-legend-label {
+    border: none !important; 
+    border-radius: 0 !important; 
+  }
+  

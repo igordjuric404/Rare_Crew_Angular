@@ -68,11 +68,6 @@
   tbody tr.highlight:hover {
     background-color: #ffd0d0 !important;
   }
-  
-  
-  .dropdown-menu, .dropdown-item{
-    width: 750px;
-  }
 
   .btn{
     background-color: #ffb500;
