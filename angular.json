@@ -34,6 +34,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": ".env",
+                "input": "",
+                "output": "."
               }
             ],
             "styles": [
@@ -96,6 +101,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": ".env",
+                "input": "",
+                "output": "."
               }
             ],
             "styles": [

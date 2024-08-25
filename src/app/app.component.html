@@ -1,4 +1,9 @@
 <div class="app-container">
-  <app-employee-table></app-employee-table>
-  <app-pie-chart></app-pie-chart>
+  <div>
+    <button class="sorting-button" (click)="sortAll()">{{ sortAscending ? 'Sort Descending' : 'Sort Ascending' }}</button>
+  </div>
+  <div class="data-container">
+    <app-employee-table #employeeTable></app-employee-table>
+    <app-pie-chart #pieChart></app-pie-chart>
+  </div>  
 </div>

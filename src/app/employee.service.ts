@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 interface EmployeeEntry {
   EmployeeName: string;
@@ -10,7 +11,7 @@ interface EmployeeEntry {
   EntryNotes: string;
 }
 
-interface EmployeeData {
+interface Employee {
   name: string;
   totalTimeWorked: number;
   entryNotes: string[];
@@ -20,40 +21,53 @@ interface EmployeeData {
   providedIn: 'root',
 })
 export class EmployeeService {
-  private apiUrl =
-    'https://rc-vault-fap-live-1.azurewebsites.net/api/gettimeentries?code=vO17RnE8vuzXzPJo5eaLLjXjmRW07law99QTD90zat9FfOQJKKUcgQ==';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getEmployees(): Observable<EmployeeData[]> {
-    return this.http.get<EmployeeEntry[]>(this.apiUrl).pipe(
-      map((data: EmployeeEntry[]) => {
-        const employeeMap: { [key: string]: { totalTime: number; notes: string[] } } = {};
+  // Fetches employee entries from the API
+  getEmployees(): Observable<EmployeeEntry[]> {
+    return this.http.get<EmployeeEntry[]>(this.apiUrl);
+  }
 
-        data.forEach(entry => {
-          const name = entry.EmployeeName || 'Unknown Employee'; // Default to 'Unknown Employee' if name is null
-          const start = new Date(entry.StarTimeUtc).getTime();
-          const end = new Date(entry.EndTimeUtc).getTime();
-          const hoursWorked = (end - start) / (1000 * 60 * 60);
+  // Transforms raw employee entries into a structured employee list
+  transformEntriesToEmployees(entries: EmployeeEntry[]): Employee[] {
+    const employeeMap: { [key: string]: { totalTime: number; notes: string[] } } = {};
 
-          if (employeeMap[name]) {
-            employeeMap[name].totalTime += hoursWorked;
-            employeeMap[name].notes.push(entry.EntryNotes || 'No Notes Provided');
-          } else {
-            employeeMap[name] = {
-              totalTime: hoursWorked,
-              notes: [entry.EntryNotes || 'No Notes Provided'],
-            };
-          }
-        });
+    // Process each entry to calculate total time worked and accumulate notes
+    entries.forEach((entry) => {
+      const name = entry.EmployeeName || 'Unknown Employee';
+      const start = new Date(entry.StarTimeUtc).getTime();
+      const end = new Date(entry.EndTimeUtc).getTime();
+      const hoursWorked = (end - start) / (1000 * 60 * 60); // Convert milliseconds to hours
 
-        return Object.keys(employeeMap)
-          .map(name => ({
-            name,
-            totalTimeWorked: employeeMap[name].totalTime,
-            entryNotes: employeeMap[name].notes,
-          }))
-          .sort((a, b) => b.totalTimeWorked - a.totalTimeWorked);
+      if (employeeMap[name]) {
+        employeeMap[name].totalTime += hoursWorked;
+        employeeMap[name].notes.push(entry.EntryNotes || 'No Notes Provided');
+      } else {
+        employeeMap[name] = {
+          totalTime: hoursWorked,
+          notes: [entry.EntryNotes || 'No Notes Provided'],
+        };
+      }
+    });
+
+    // Convert the employee map into an array of Employee objects
+    return Object.keys(employeeMap).map((name) => ({
+      name,
+      totalTimeWorked: employeeMap[name].totalTime,
+      entryNotes: employeeMap[name].notes,
+    }));
+  }
+
+  // Fetches and sorts employees based on the sort order (ascending or descending)
+  getSortedEmployees(sortAscending: boolean): Observable<Employee[]> {
+    return this.getEmployees().pipe(
+      map((entries: EmployeeEntry[]) => { // Specify the type for 'entries'
+        const employees = this.transformEntriesToEmployees(entries);
+        return employees.sort((a, b) =>
+          sortAscending ? a.totalTimeWorked - b.totalTimeWorked : b.totalTimeWorked - a.totalTimeWorked
+        );
       })
     );
   }

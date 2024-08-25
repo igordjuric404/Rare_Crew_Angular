@@ -4,17 +4,19 @@ import { provideHttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
-import { PieChartComponent } from './pie-chart/pie-chart.component'; 
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { BaseChartDirective  } from 'ng2-charts'; // Import this module
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeTableComponent
+    EmployeeTableComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PieChartComponent
+    BaseChartDirective
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]
